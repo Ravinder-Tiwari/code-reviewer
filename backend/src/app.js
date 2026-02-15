@@ -16,7 +16,7 @@ app.use("/ai", aiRoutes);
 
 // ✅ Express 5 SAFE fallback (no "*", no "/*")
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 module.exports = app;
