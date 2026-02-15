@@ -8,15 +8,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static frontend
-app.use(express.static(path.join(__dirname, "public")));
+// ✅ Define ONE frontend path
+const publicPath = path.join(__dirname, "public");
 
-// API routes
+// ✅ Serve static frontend files
+app.use(express.static(publicPath));
+
+// ✅ API routes
 app.use("/ai", aiRoutes);
 
-// ✅ Express 5 SAFE fallback (no "*", no "/*")
+// ✅ SPA fallback (must use SAME folder)
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 module.exports = app;
