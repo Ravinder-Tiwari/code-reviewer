@@ -8,18 +8,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Define ONE frontend path
-const publicPath = path.join(__dirname, "public");
 
 // ✅ Serve static frontend files
-app.use(express.static(publicPath));
+app.use(express.static("./public"));
 
-// ✅ API routes
 app.use("/ai", aiRoutes);
 
+
 // ✅ SPA fallback (must use SAME folder)
-app.use((req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"));
+app.use('*name',(req, res) => {
+  res.sendFile(path.join(__dirname,"..","/public/index.html"));
 });
 
 module.exports = app;
